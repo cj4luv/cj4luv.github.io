@@ -23,8 +23,9 @@ var transitionEvent = whichTransitionEvent();
 // var hamburger = $('.hamburger');
 var show  = 0;
 var s = 0.1; 
+const $ = window.$;
 
-$(document).on('click', '.menu-btn', function (a) {    
+$(document).on('click', '.menu-btn', function (a) {
     a.preventDefault();
     if ($('#page-title').hasClass('hidden')){
       show = 0;
@@ -38,18 +39,18 @@ $(document).on('click', '.menu-btn', function (a) {
              $(this).css({
                   'transition-delay' : s*(1+index) + 's'
              });
-         });    
+         });
     $(".menu .links li a").each(function(index){
              $(this).css({
                   'transition-delay' : 0.4+s*(0.5+index) + 's'
              });
-         });    
+         });
     $('.close').addClass('animate');
-    $('.hamburger').one(transitionEvent,   
+    $('.hamburger').one(transitionEvent,
       function() {
         $('.menu').toggleClass('open');
         $('.menu ul li a').addClass("animate");
-        $('.menu').one(transitionEvent,   
+        $('.menu').one(transitionEvent,
           function() {
             $('.menu ul li a').css("transition-delay", "0");
           });
@@ -57,14 +58,14 @@ $(document).on('click', '.menu-btn', function (a) {
     });
 });
 
-$(document).on('click', '.close', function (a) { 
+$(document).on('click', '.close', function (a) {
     a.preventDefault();
     $('.menu ul li a').removeClass("animate");
     $('.close').removeClass('animate');
     $('.menu').toggleClass('open');
     $('body').css('overflow', 'auto');
-  
-    $('.menu').one(transitionEvent,   
+
+    $('.menu').one(transitionEvent,
       function(e) {
         $('.hamburger').removeClass('hidden');
         if(show == 1) {
@@ -87,7 +88,7 @@ $(function(){
           $('.menu ul li a').removeClass("animate");
           $('.close').removeClass('animate');
           $('.menu').toggleClass('open');
-          $('.menu').one(transitionEvent,   
+          $('.menu').one(transitionEvent,
           function() {
             $('body').css('overflow', 'visible');
             $container.addClass('is-exiting');
@@ -103,10 +104,10 @@ $(function(){
           // Restart your animation
           smoothState.restartCSSAnimations();
         }
-        
+
       }
     },
-    
+
     onReady: {
       duration: 0,
       render: function ($container, $newContent) {
