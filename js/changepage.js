@@ -22,7 +22,7 @@ var transitionEvent = whichTransitionEvent();
 // var close = $('.close');
 // var hamburger = $('.hamburger');
 var show  = 0;
-var s = 0.1; 
+var s = 0.1;
 const $ = window.$;
 
 $(document).on('click', '.menu-btn', function (a) {
@@ -35,7 +35,7 @@ $(document).on('click', '.menu-btn', function (a) {
       show=1;
     }
     $('.hamburger').addClass('hidden');
-    $(".menu ul li a").each(function(index){
+    $(".menu ul li p").each(function(index){
              $(this).css({
                   'transition-delay' : s*(1+index) + 's'
              });
@@ -49,10 +49,12 @@ $(document).on('click', '.menu-btn', function (a) {
     $('.hamburger').one(transitionEvent,
       function() {
         $('.menu').toggleClass('open');
+        $('.menu ul li p').addClass("animate");
         $('.menu ul li a').addClass("animate");
         $('.menu').one(transitionEvent,
           function() {
             $('.menu ul li a').css("transition-delay", "0");
+            $('.menu ul li p').css("transition-delay", "0");
           });
         $('body').css('overflow', 'hidden');
     });
@@ -60,7 +62,7 @@ $(document).on('click', '.menu-btn', function (a) {
 
 $(document).on('click', '.close', function (a) {
     a.preventDefault();
-    $('.menu ul li a').removeClass("animate");
+    $('.menu ul li a, .menu ul li p').removeClass("animate");
     $('.close').removeClass('animate');
     $('.menu').toggleClass('open');
     $('body').css('overflow', 'auto');
